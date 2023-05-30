@@ -128,6 +128,8 @@ def main():
             break
         balance = spin(balance)
         print(f"You have ${balance} left.")
+        if balance == 0:
+            balance += deposit()
 
 
 main()
