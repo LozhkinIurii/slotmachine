@@ -20,6 +20,9 @@ symbols_value = {
     "D": 2,
 }
 
+total_deposit = 0
+
+
 def check_winnings(columns, lines, bet, values):
     winnings = 0
     winning_lines = []
@@ -68,11 +71,12 @@ def deposit():
         if amount.isdigit():
             amount = int(amount)
             if amount > 0:
-                return amount
+                break
             else:
                 print("Amount must be greater than zero.")
         else:
             print("Plese, enter a valid number.")
+    return amount
 
 
 def get_number_of_lines():
@@ -100,7 +104,8 @@ def get_bet():
             print("Plese, enter a valid number.")
 
 
-def spin(balance):
+def game(balance):
+    global total_deposit
     lines = get_number_of_lines()
     while True:
         bet = get_bet()
@@ -108,6 +113,8 @@ def spin(balance):
         if total_bet > balance:
             print(f"You do not have enough money to bet that amount. Your current balance: ${balance}.")
             answer = input("Do you want to deposit more money (y|n): ")
+            if answer == "y":
+                total_deposit += deposit()
         else:
             break
     print(f"Your bet is ${bet} on {lines} lines. Total bet: ${total_bet}.")
@@ -120,13 +127,14 @@ def spin(balance):
     return winnings - total_bet
 
 def main():
-    balance = deposit()
+    global total_deposit
+    total_deposit += deposit()
     while True:
         answer = input("Press enter to spin('q' to quit).")
         if answer == "q":
             break
-    balance += spin(balance)
-    print(f"You have ${balance} left.")
+        total_deposit += game(total_deposit)
+        print(f"You have ${total_deposit} left.")
 
 
 main()
