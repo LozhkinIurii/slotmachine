@@ -1,6 +1,6 @@
 import random
 
-MAX_LINES = 3
+MAX_LINES = 5
 MAX_BET = 100
 MIN_BET = 1
 ROWS = 5
@@ -100,14 +100,14 @@ def get_bet():
             print("Plese, enter a valid number.")
 
 
-def main():
-    balance = deposit()
+def spin(balance):
     lines = get_number_of_lines()
     while True:
         bet = get_bet()
         total_bet = bet * lines
         if total_bet > balance:
             print(f"You do not have enough money to bet that amount. Your current balance: ${balance}.")
+            answer = input("Do you want to deposit more money (y|n): ")
         else:
             break
     print(f"Your bet is ${bet} on {lines} lines. Total bet: ${total_bet}.")
@@ -117,6 +117,16 @@ def main():
     winnings, winning_lines = check_winnings(slots, lines, bet, symbols_value)
     print(f"You won ${winnings}.")
     print(f"You won on lines: ", *winning_lines)
+    return winnings - total_bet
+
+def main():
+    balance = deposit()
+    while True:
+        answer = input("Press enter to spin('q' to quit).")
+        if answer == "q":
+            break
+    balance += spin(balance)
+    print(f"You have ${balance} left.")
 
 
 main()
