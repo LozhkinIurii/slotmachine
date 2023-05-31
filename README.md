@@ -1,4 +1,4 @@
-# Slot machine app.
+# Slot machine app
 
 The application represents casino slot machine. All interactions are made in terminal. However, odds are not configured in the same way as in real slot machines. The main idea is to make same functionality, which is:
 - player can deposit money
