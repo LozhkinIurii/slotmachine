@@ -10,4 +10,4 @@ The application represents casino slot machine. All interactions are made in ter
 
 **To start the game run the *main.py* file in IDE or in command line type *python3 main.py* (for older versions  *python*), or *./main.py***
 
-PS. Money is not real in this game.
+PS. Money is not real in this game, gambling is evil.
